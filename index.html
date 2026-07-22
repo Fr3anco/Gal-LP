@@ -393,112 +393,12 @@ function About({ t, bp }) {
 // ─── SERVICE ICONS ────────────────────────────────────────────────────────────
 // Style: gray outline silhouette + filled accent dot with radiating pain lines
 
-function PainDot({ cx, cy, color, r=4 }) {
-  return (
-    <g>
-      <circle cx={cx} cy={cy} r={r} fill={color}/>
-      <line x1={cx} y1={cy-r-3} x2={cx} y2={cy-r-7} stroke={color} strokeWidth="1.8" strokeLinecap="round"/>
-      <line x1={cx} y1={cy+r+3} x2={cx} y2={cy+r+7} stroke={color} strokeWidth="1.8" strokeLinecap="round"/>
-      <line x1={cx-r-3} y1={cy} x2={cx-r-7} y2={cy} stroke={color} strokeWidth="1.8" strokeLinecap="round"/>
-      <line x1={cx+r+3} y1={cy} x2={cx+r+7} y2={cy} stroke={color} strokeWidth="1.8" strokeLinecap="round"/>
-      <line x1={cx-r-2} y1={cy-r-2} x2={cx-r-5} y2={cy-r-5} stroke={color} strokeWidth="1.8" strokeLinecap="round"/>
-      <line x1={cx+r+2} y1={cy-r-2} x2={cx+r+5} y2={cy-r-5} stroke={color} strokeWidth="1.8" strokeLinecap="round"/>
-    </g>
-  );
-}
-
-function IconSportsInjury({ color, size=56 }) {
-  const gray = "#6b6b6b";
-  return (
-    <svg width={size} height={size} viewBox="0 0 56 56" fill="none" strokeLinecap="round" strokeLinejoin="round">
-      {/* running figure outline */}
-      <circle cx="38" cy="8" r="5" stroke={gray} strokeWidth="1.8"/>
-      <path d="M38 13 L34 22 L26 28 M34 22 L37 31 L44 38 M37 31 L44 26 M34 16 L28 13" stroke={gray} strokeWidth="1.8"/>
-      {/* pain dot on knee */}
-      <PainDot cx={28} cy={36} color={color} r={3.5}/>
-    </svg>
-  );
-}
-
-function IconNeckPain({ color, size=56 }) {
-  const gray = "#6b6b6b";
-  return (
-    <svg width={size} height={size} viewBox="0 0 56 56" fill="none" strokeLinecap="round" strokeLinejoin="round">
-      {/* side head profile */}
-      <path d="M28 6 C20 6 15 11 15 18 C15 24 18 28 20 30 L20 38 L28 38 L28 30 C32 29 36 25 36 20 C36 12 33 6 28 6 Z" stroke={gray} strokeWidth="1.8"/>
-      {/* ear */}
-      <path d="M15 18 C13 18 12 20 13 22 C14 24 15 23 15 22" stroke={gray} strokeWidth="1.5"/>
-      {/* pain dot on neck */}
-      <PainDot cx={36} cy={30} color={color} r={3.5}/>
-    </svg>
-  );
-}
-
-function IconBackPain({ color, size=56 }) {
-  const gray = "#6b6b6b";
-  return (
-    <svg width={size} height={size} viewBox="0 0 56 56" fill="none" strokeLinecap="round" strokeLinejoin="round">
-      {/* back/torso silhouette from behind */}
-      <circle cx="28" cy="8" r="5" stroke={gray} strokeWidth="1.8"/>
-      <path d="M18 16 C18 14 22 13 28 13 C34 13 38 14 38 16 L40 32 C40 35 36 38 28 38 C20 38 16 35 16 32 Z" stroke={gray} strokeWidth="1.8"/>
-      {/* spine line */}
-      <line x1="28" y1="13" x2="28" y2="38" stroke={gray} strokeWidth="1.2" strokeDasharray="2 2"/>
-      {/* pain dot on lower back */}
-      <PainDot cx={38} cy={30} color={color} r={3.5}/>
-    </svg>
-  );
-}
-
-function IconMigraine({ color, size=56 }) {
-  const gray = "#6b6b6b";
-  return (
-    <svg width={size} height={size} viewBox="0 0 56 56" fill="none" strokeLinecap="round" strokeLinejoin="round">
-      {/* clean side profile head - fine line */}
-      <path d="M30 6 C24 6 18 10 16 16 C14 21 15 27 18 31 C19 33 20 35 20 37 L32 37 C32 35 33 33 34 31 C37 27 38 21 36 16 C34 10 36 6 30 6 Z"
-        stroke={gray} strokeWidth="1.4" fill="none"/>
-      {/* neck */}
-      <path d="M22 37 L22 44 M30 37 L30 44" stroke={gray} strokeWidth="1.4"/>
-      {/* jaw line subtle */}
-      <path d="M22 44 Q26 47 30 44" stroke={gray} strokeWidth="1.4"/>
-      {/* eye - minimal dot */}
-      <circle cx="26" cy="20" r="1.2" fill={gray}/>
-      {/* eyebrow */}
-      <path d="M23 17 Q26 15.5 29 17" stroke={gray} strokeWidth="1.2"/>
-      {/* nose */}
-      <path d="M25 24 L24 27 Q26 28 28 27" stroke={gray} strokeWidth="1.2"/>
-      {/* pain dot on temple */}
-      <PainDot cx={34} cy={14} color={color} r={3.5}/>
-    </svg>
-  );
-}
-
-function IconMassage({ color, size=56 }) {
-  const gray = "#6b6b6b";
-  return (
-    <svg width={size} height={size} viewBox="0 0 60 56" fill="none" strokeLinecap="round" strokeLinejoin="round">
-      {/* table */}
-      <rect x="8" y="32" width="44" height="7" rx="2" stroke={gray} strokeWidth="1.8"/>
-      <line x1="14" y1="39" x2="14" y2="48" stroke={gray} strokeWidth="1.8"/>
-      <line x1="46" y1="39" x2="46" y2="48" stroke={gray} strokeWidth="1.8"/>
-      {/* person lying - body */}
-      <path d="M16 32 C16 26 20 23 28 23 L42 23 C45 23 46 25 46 27 C46 30 44 32 42 32" stroke={gray} strokeWidth="1.8"/>
-      {/* person head */}
-      <circle cx="48" cy="26" r="5" stroke={gray} strokeWidth="1.8"/>
-      {/* therapist */}
-      <circle cx="10" cy="16" r="4.5" stroke={gray} strokeWidth="1.8"/>
-      <path d="M10 21 L12 30 M10 21 L8 28" stroke={gray} strokeWidth="1.8"/>
-      {/* pain dot on back */}
-      <PainDot cx={30} cy={24} color={color} r={3}/>
-    </svg>
-  );
-}
-
 const SERVICES = [
-  {IconComp:IconSportsInjury, title:"טיפול בפציעות ספורט",desc:"שיקום מהיר ויעיל לאחר פציעות ספורט, עם חזרה מלאה לפעילות."},
-  {IconComp:IconNeckPain,     title:"טיפול בכאבי צוואר",  desc:"הקלה על מתחים וכאבים בצוואר תוך שיפור טווח התנועה."},
-  {IconComp:IconBackPain,     title:"טיפול בכאבי גב",     desc:"פתרון לכאבי גב כרוניים וחריפים בעזרת טכניקות מתקדמות."},
-  {IconComp:IconMigraine,     title:"טיפול במיגרנות",     desc:"הפחתת תדירות ועוצמת מיגרנות באמצעות עיסוי ממוקד."},
-  {IconComp:IconMassage,      title:"עיסוי ספורטאים",     desc:"עיסוי ספורטאים לשחרור שרירים, מניעת פציעות ושיפור ביצועים."},
+  {icon:"uploads/icon-sports-injury.png", title:"טיפול בפציעות ספורט",desc:"שיקום מהיר ויעיל לאחר פציעות ספורט, עם חזרה מלאה לפעילות."},
+  {icon:"uploads/icon-neck-pain.png",     title:"טיפול בכאבי צוואר",  desc:"הקלה על מתחים וכאבים בצוואר תוך שיפור טווח התנועה."},
+  {icon:"uploads/icon-back-pain.png",     title:"טיפול בכאבי גב",     desc:"פתרון לכאבי גב כרוניים וחריפים בעזרת טכניקות מתקדמות."},
+  {icon:"uploads/icon-migraine.png",      title:"טיפול במיגרנות",     desc:"הפחתת תדירות ועוצמת מיגרנות באמצעות עיסוי ממוקד."},
+  {icon:"uploads/icon-massage.png",       title:"עיסוי ספורטאים",     desc:"עיסוי ספורטאים לשחרור שרירים, מניעת פציעות ושיפור ביצועים."},
 ];
 
 function Services({ t, bp }) {
@@ -536,8 +436,8 @@ function Services({ t, bp }) {
               boxShadow: hovered===i?"0 12px 32px rgba(0,0,0,0.12)":"0 2px 8px rgba(0,0,0,0.04)",
               cursor:"default"
             }}>
-            <div style={{marginBottom:16}}>
-              <s.IconComp color={hovered===i?"rgba(255,255,255,0.9)":t.accent} size={48}/>
+            <div style={{marginBottom:16,textAlign:"center"}}>
+              <img src={s.icon} alt="" style={{width:48,height:48,display:"block",margin:"0 auto",objectFit:"contain"}}/>
             </div>
             <h3 style={{
               fontFamily:t.headingFont, fontSize:19, fontWeight:700,
