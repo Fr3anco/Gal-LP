@@ -23,6 +23,13 @@
 <script type="text/babel">
 const { useState, useEffect, useRef } = React;
 
+// Pushes GA4-ready events to the dataLayer so they can be picked up as
+// conversions/events inside Google Tag Manager without further code changes.
+function trackEvent(eventName, params) {
+  window.dataLayer = window.dataLayer || [];
+  window.dataLayer.push({ event: eventName, ...params });
+}
+
 // ─── RESPONSIVE HOOK ─────────────────────────────────────────────────────────
 // Three-tier system tuned for real devices:
 //   mobile   < 768   — iPhone SE/12/13/14/15(+ Pro/Max), Galaxy S/Note in portrait
@@ -190,7 +197,8 @@ function Nav({ t, scrolled, bp }) {
 
       {/* Desktop CTA */}
       {!isCompactNav && (
-        <a href="https://wa.me/972527029010" target="_blank" rel="noopener noreferrer" style={{
+        <a href="https://wa.me/972527029010" target="_blank" rel="noopener noreferrer"
+        onClick={()=>trackEvent("whatsapp_click",{cta_location:"nav_desktop"})} style={{
           display:"inline-block",
           background:"transparent",
           border:`1.5px solid ${scrolled||!t.darkNav?t.accent:"rgba(255,255,255,0.7)"}`,
@@ -245,7 +253,7 @@ function Nav({ t, scrolled, bp }) {
             }}>{l}</a>
           ))}
           <a href="https://wa.me/972527029010" target="_blank" rel="noopener noreferrer"
-            onClick={handleLinkClick} style={{
+            onClick={(e)=>{handleLinkClick(e);trackEvent("whatsapp_click",{cta_location:"nav_mobile_menu"})}} style={{
             display:"inline-block", textAlign:"center",
             background:t.accent, color:"#fff",
             padding:"14px", marginTop:16,
@@ -309,7 +317,8 @@ function Hero({ t, fullHeight, bp }) {
             : <>אם אתם סובלים מכאבי שלד וגב, לאחר תאונות, פציעות ספורט<br/>או נמצאים בגיל השלישי – ביחד נמצא את הדרך להשתחרר מהכאב.</>
           }
         </p>
-        <a href="https://wa.me/972527029010" target="_blank" rel="noopener noreferrer" style={{
+        <a href="https://wa.me/972527029010" target="_blank" rel="noopener noreferrer"
+        onClick={()=>trackEvent("whatsapp_click",{cta_location:"hero"})} style={{
           display:"inline-block",
           background:t.accent, color:"#fff", border:"none",
           padding: isMobile?"14px 32px":"14px 36px",
@@ -457,7 +466,8 @@ function Services({ t, bp }) {
         }}>
           <h3 style={{fontFamily:t.headingFont,fontSize:20,fontWeight:700,marginBottom:12,lineHeight:1.4}}>מוכנים להתחיל?</h3>
           <p style={{fontSize:14,opacity:0.9,marginBottom:24,fontFamily:t.bodyFont,lineHeight:1.6}}>צרו איתי קשר ונבנה תוכנית טיפול אישית</p>
-          <a href="https://wa.me/972527029010" target="_blank" rel="noopener noreferrer" style={{
+          <a href="https://wa.me/972527029010" target="_blank" rel="noopener noreferrer"
+            onClick={()=>trackEvent("whatsapp_click",{cta_location:"services_cta"})} style={{
             display:"inline-block",
             background:"#fff",color:t.accent,border:"none",
             padding:"10px 24px",
@@ -657,6 +667,7 @@ function Contact({ t, bp }) {
       const data = await res.json();
       if (data.success) {
         setSent(true);
+        trackEvent("generate_lead",{form_location:"contact_form",service:form.service});
       } else {
         setError(true);
       }
@@ -690,6 +701,7 @@ function Contact({ t, bp }) {
               {icon:"📍",text:"ברכה צפירה 3 (מגדלי מקס), עכו",href:"https://waze.com/ul?q=ברכה%20צפירה%203%20עכו&navigate=yes"}
             ].map(({icon,text,href})=>(
               <a key={text} href={href} target={href.startsWith("http")?"_blank":undefined} rel="noopener noreferrer"
+                 onClick={()=>trackEvent(href.startsWith("tel:")?"phone_click":"location_click",{cta_location:"contact_info"})}
                  style={{display:"flex",alignItems:"center",gap:16,textDecoration:"none",cursor:"pointer",transition:"transform 0.2s"}}
                  onMouseOver={e=>{e.currentTarget.style.transform="translateX(-4px)"}}
                  onMouseOut={e=>{e.currentTarget.style.transform="translateX(0)"}}>
