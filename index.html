@@ -434,10 +434,11 @@ function Services({ t, bp }) {
               transition:"all 0.25s ease",
               transform: hovered===i?"translateY(-4px)":"none",
               boxShadow: hovered===i?"0 12px 32px rgba(0,0,0,0.12)":"0 2px 8px rgba(0,0,0,0.04)",
-              cursor:"default"
+              cursor:"default",
+              textAlign:"center"
             }}>
-            <div style={{marginBottom:16,textAlign:"center"}}>
-              <img src={s.icon} alt="" style={{width:48,height:48,display:"block",margin:"0 auto",objectFit:"contain"}}/>
+            <div style={{marginBottom:10,textAlign:"center"}}>
+              <img src={s.icon} alt="" style={{width:53,height:53,display:"block",margin:"0 auto",objectFit:"contain"}}/>
             </div>
             <h3 style={{
               fontFamily:t.headingFont, fontSize:19, fontWeight:700,
