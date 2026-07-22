@@ -632,10 +632,38 @@ function Contact({ t, bp }) {
   const stacked = isMobile || width < 900;
   const [form, setForm] = useState({name:"",phone:"",service:"",msg:""});
   const [sent, setSent] = useState(false);
+  const [sending, setSending] = useState(false);
+  const [error, setError] = useState(false);
 
-  function handleSubmit(e) {
+  async function handleSubmit(e) {
     e.preventDefault();
-    setSent(true);
+    setSending(true);
+    setError(false);
+    try {
+      const res = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        headers: { "Content-Type": "application/json", Accept: "application/json" },
+        body: JSON.stringify({
+          access_key: "86146517-20e3-4720-b342-dc8875e68a38",
+          subject: "פנייה חדשה מהאתר - גל פרנקו",
+          from_name: form.name,
+          "שם מלא": form.name,
+          "טלפון": form.phone,
+          "סוג טיפול": form.service,
+          "הודעה": form.msg,
+        }),
+      });
+      const data = await res.json();
+      if (data.success) {
+        setSent(true);
+      } else {
+        setError(true);
+      }
+    } catch (err) {
+      setError(true);
+    } finally {
+      setSending(false);
+    }
   }
 
   return (
@@ -695,7 +723,7 @@ function Contact({ t, bp }) {
               ].map(({label,key,type,placeholder})=>(
                 <div key={key}>
                   <label style={{display:"block",fontSize:13,color:t.textMid,marginBottom:6,fontFamily:t.bodyFont,fontWeight:500}}>{label}</label>
-                  <input type={type} placeholder={placeholder} value={form[key]}
+                  <input type={type} required placeholder={placeholder} value={form[key]}
                     onChange={e=>setForm({...form,[key]:e.target.value})}
                     style={{
                       width:"100%",padding:"12px 16px",
@@ -718,6 +746,7 @@ function Contact({ t, bp }) {
                   }}>
                   <option value="">בחרו סוג טיפול</option>
                   {SERVICES.map(s=><option key={s.title} value={s.title}>{s.title}</option>)}
+                  <option value="אחר">אחר</option>
                 </select>
               </div>
               <div>
@@ -732,19 +761,25 @@ function Contact({ t, bp }) {
                     background:t.bg,outline:"none",resize:"vertical",direction:"rtl"
                   }}/>
               </div>
-              <button type="submit" style={{
+              {error && (
+                <p style={{fontSize:13.5,color:"#b3382c",fontFamily:t.bodyFont,lineHeight:1.6}}>
+                  משהו השתבש בשליחה. אפשר לנסות שוב, או ליצור קשר ישירות בטלפון 052-7029010.
+                </p>
+              )}
+              <button type="submit" disabled={sending} style={{
                 background:`linear-gradient(135deg, ${t.accent} 0%, ${t.accentDark} 100%)`,
                 color:"#fff",border:"none",
                 padding:"14px",
                 borderRadius: t.btnStyle==="pill"?"50px": t.btnStyle==="square"?"6px":"50px",
                 fontSize:16,fontFamily:t.bodyFont,fontWeight:600,
-                cursor:"pointer",marginTop:4,
+                cursor: sending?"default":"pointer",marginTop:4,
+                opacity: sending?0.7:1,
                 boxShadow:`0 4px 16px ${t.accent}55`,
                 transition:"transform 0.2s, box-shadow 0.2s"
               }}
-              onMouseOver={e=>{e.currentTarget.style.transform="translateY(-1px)";e.currentTarget.style.boxShadow=`0 8px 24px ${t.accent}66`}}
+              onMouseOver={e=>{if(!sending){e.currentTarget.style.transform="translateY(-1px)";e.currentTarget.style.boxShadow=`0 8px 24px ${t.accent}66`}}}
               onMouseOut={e=>{e.currentTarget.style.transform="translateY(0)";e.currentTarget.style.boxShadow=`0 4px 16px ${t.accent}55`}}
-              >שלח פנייה</button>
+              >{sending?"שולח...":"שלח פנייה"}</button>
             </form>
           )}
         </div>
