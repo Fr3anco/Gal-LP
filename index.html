@@ -873,7 +873,11 @@ function Footer({ t, bp }) {
         <SpineIcon color={t.accent} size={24}/>
         <span style={{color:"rgba(255,255,255,0.8)",fontWeight:500}}>גל פרנקו | ספורטתרפיסטית שיקומית</span>
       </div>
-     <a href="accessibility.html" style={{color:"rgba(255,255,255,0.6)",textDecoration:"underline"}}>הצהרת נגישות</a>
+     <div style={{display:"flex",gap:16}}>
+       <a href="accessibility.html" style={{color:"rgba(255,255,255,0.6)",textDecoration:"underline"}}>הצהרת נגישות</a>
+       <a href="privacy.html" style={{color:"rgba(255,255,255,0.6)",textDecoration:"underline"}}>הצהרת פרטיות</a>
+       <a href="#" onClick={e=>{e.preventDefault(); window.openCookiePreferences && window.openCookiePreferences();}} style={{color:"rgba(255,255,255,0.6)",textDecoration:"underline"}}>ניהול עוגיות</a>
+     </div>
       <span>© {new Date().getFullYear()} כל הזכויות שמורות</span>
     </footer>
   );
@@ -930,5 +934,6 @@ function App() {
 ReactDOM.createRoot(document.getElementById("root")).render(<App/>);
 </script>
 <script src="accessibility-widget.js"></script>
+<script src="cookie-consent.js"></script>
 </body>
 </html>
