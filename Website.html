@@ -394,11 +394,11 @@ function About({ t, bp }) {
 // Style: gray outline silhouette + filled accent dot with radiating pain lines
 
 const SERVICES = [
-  {icon:"uploads/sports_injury_normal.svg",  title:"טיפול בפציעות ספורט",desc:"שיקום מהיר ויעיל לאחר פציעות ספורט, עם חזרה מלאה לפעילות."},
-  {icon:"uploads/neck_pain_normal.svg",      title:"טיפול בכאבי צוואר",  desc:"הקלה על מתחים וכאבים בצוואר תוך שיפור טווח התנועה."},
-  {icon:"uploads/back_pain_normal.svg",      title:"טיפול בכאבי גב",     desc:"פתרון לכאבי גב כרוניים וחריפים בעזרת טכניקות מתקדמות."},
-  {icon:"uploads/migraine_normal.svg",       title:"טיפול במיגרנות",     desc:"הפחתת תדירות ועוצמת מיגרנות באמצעות עיסוי ממוקד."},
-  {icon:"uploads/sports_massage_normal.svg", title:"עיסוי ספורטאים",     desc:"עיסוי ספורטאים לשחרור שרירים, מניעת פציעות ושיפור ביצועים."},
+  {icon:"uploads/sports_injury_normal.svg",  iconHover:"uploads/sports_injury_hover.svg",  title:"טיפול בפציעות ספורט",desc:"שיקום מהיר ויעיל לאחר פציעות ספורט, עם חזרה מלאה לפעילות."},
+  {icon:"uploads/neck_pain_normal.svg",      iconHover:"uploads/neck_pain_hover.svg",      title:"טיפול בכאבי צוואר",  desc:"הקלה על מתחים וכאבים בצוואר תוך שיפור טווח התנועה."},
+  {icon:"uploads/back_pain_normal.svg",      iconHover:"uploads/back_pain_hover.svg",      title:"טיפול בכאבי גב",     desc:"פתרון לכאבי גב כרוניים וחריפים בעזרת טכניקות מתקדמות."},
+  {icon:"uploads/migraine_normal.svg",       iconHover:"uploads/migraine_hover.svg",       title:"טיפול במיגרנות",     desc:"הפחתת תדירות ועוצמת מיגרנות באמצעות עיסוי ממוקד."},
+  {icon:"uploads/sports_massage_normal.svg", iconHover:"uploads/sports_massage_hover.svg", title:"עיסוי ספורטאים",     desc:"עיסוי ספורטאים לשחרור שרירים, מניעת פציעות ושיפור ביצועים."},
 ];
 
 function Services({ t, bp }) {
@@ -438,7 +438,7 @@ function Services({ t, bp }) {
               textAlign:"center"
             }}>
             <div style={{marginBottom:24,textAlign:"center"}}>
-              <img src={s.icon} alt="" style={{width:61,height:61,display:"block",margin:"0 auto",objectFit:"contain"}}/>
+              <img src={hovered===i?s.iconHover:s.icon} alt="" style={{width:61,height:61,display:"block",margin:"0 auto",objectFit:"contain"}}/>
             </div>
             <h3 style={{
               fontFamily:t.headingFont, fontSize:19, fontWeight:700,
