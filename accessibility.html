@@ -26,7 +26,8 @@
     padding: 16px 8%;
     display: flex; align-items: center; justify-content: space-between;
   }
-  header .brand { font-size: 17px; font-weight: 700; color: #2a2220; text-decoration: none; }
+header .brand { display: flex; align-items: center; gap: 10px; font-size: 17px; font-weight: 700; color: #2a2220; text-decoration: none; }
+header .brand img { height: 34px; width: auto; object-fit: contain; }
   header .back {
     font-size: 14px; color: #c9938a; text-decoration: none; font-weight: 500;
     border: 1.5px solid #c9938a; border-radius: 24px; padding: 8px 18px;
@@ -95,7 +96,10 @@
 <body>
 
 <header>
-  <a class="brand" href="Website.html">גל פרנקו | ספורטתרפיסטית שיקומית</a>
+  <a class="brand" href="Website.html">
+    <img src="uploads/logo.png" alt="גל פרנקו">
+    <span>גל פרנקו | ספורטתרפיסטית שיקומית</span>
+  </a>
   <a class="back" href="Website.html">חזרה לאתר</a>
 </header>
 
